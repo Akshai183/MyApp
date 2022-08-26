@@ -19,22 +19,4 @@ pipeline {
         }
     }
 }
-node{
-    stage('Git checkout from Github')
-    git 'https://github.com/Akshai183/MyApp.git'
-}
-    stage('Mvane build'){
-       sh 'mvn clean package'
-}
-    stage('docker run'){
-       sh '''sudo su -
-       sudo docker pull ubuntu 
-       sudo docker run -d -p 80:80 --name Akshaicontainer ubuntu
-       sudo docker start Akshaicontainer
-       sudo su -
-       sudo apt-get update
-       sudo apt-get install apache2 -y
-       sudo systemctl start apache2.service
-       sudo chkconfig apache2 on '''
-}
 
